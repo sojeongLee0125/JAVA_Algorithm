@@ -1,6 +1,5 @@
 package Array;
 
-import java.util.Enumeration;
 import java.util.Scanner;
 
 public class Array_5 {
