@@ -11,9 +11,9 @@ public class Recursive_1 {
         if (n == 0) return;
 
         // recursive case
-        System.out.print("내림차순 출력 : " + n + " ");
+        System.out.print(n + " "); // 내림차순 출력시 위치
         dfs(n - 1);
-        System.out.print("오름차순 출력 : " + n + " ");
+        System.out.print(n + " "); // 오름차순 출력시 위치
     }
 
     public static void main(String[] args) {
