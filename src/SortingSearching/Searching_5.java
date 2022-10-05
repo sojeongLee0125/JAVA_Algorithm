@@ -19,7 +19,7 @@ public class Searching_5 {
         while (lt <= rt) {
             int mid = (lt + rt) / 2;
             int sum = 0;
-            int cnt = 0;
+            int cnt = 1;
             for (int i = 0; i < arr.length; i++) {
                 if (sum + arr[i] <= mid) {
                     sum += arr[i];
@@ -28,7 +28,6 @@ public class Searching_5 {
                     sum = arr[i];
                 }
             }
-            if (sum != 0) cnt++;
             if (cnt > m) {
                 // 용량을 늘려야 한다.
                 lt = mid + 1;
@@ -81,6 +80,6 @@ public class Searching_5 {
         for (int i = 0; i < n; i++) {
             arr[i] = kb.nextInt();
         }
-        System.out.println(solution2(n, m, arr));
+        System.out.println(solution1(n, m, arr));
     }
 }
