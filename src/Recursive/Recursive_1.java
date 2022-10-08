@@ -3,7 +3,6 @@ package Recursive;
 import java.util.Scanner;
 
 public class Recursive_1 {
-
     static void dfs(int n) {
         // base case
         if (n == 0) return;
