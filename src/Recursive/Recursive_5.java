@@ -23,6 +23,7 @@ public class Recursive_5 {
     }
 
     public static void main(String[] args) {
+
         // 트리 세팅
         Node root = new Node(1);
         root.lt = new Node(2);
