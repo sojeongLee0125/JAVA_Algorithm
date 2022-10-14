@@ -6,14 +6,14 @@ public class DFS_12 {
 
     // 1) 피자집들을 ArrayList로 받는다. 집들을 ArrayList로 받는다.
     // 2) M개로 나올 수 있는 조합의 경우의 수를 구한다.
-    // 3) M개의 피자집들을 선택한다.(조합)
-    // 4) 선택된 피자집과 집들과의 거리를 구한다.
-    // 5) sum이 최소일 때의 피자집 리스트와 sum을 저장한다.
-    // 6) sum을 출력한다.
+    // 3) 현재 집을 기준으로 조합된 피자집 리스트들과의 거리를 구한다.(피자집들과의 거리 중 최소값을 저장한다.)
+    // 4) 도시의 피자집 거리를 구한다.(sum)
+    // 5) minSum과 sum을 비교 후 최소값을 업데이트 한다.
     static int N, M;
     static int minSum = Integer.MAX_VALUE;
-    static ArrayList<Point> homeList = new ArrayList<>();
-    static ArrayList<Point> pizzaList = new ArrayList<>();
+    static ArrayList<Point> pz = new ArrayList<>();
+    static ArrayList<Point> hm = new ArrayList<>();
+    static int[] combi;
 
     static class Point {
         int y;
@@ -25,26 +25,26 @@ public class DFS_12 {
         }
     }
 
-    // 2) M개로 나올 수 있는 조합의 경우의 수를 구한다.
-    static int[] combiList;
-
-    static void combi(int cnt, int idx) {
-        if (cnt == M) {
-            // 조합 하나가 완성됨
+    public static void DFS(int L, int idx) {
+        if (L == M) {
+            // 조합 완성
+            // 집 하나를 선택
             int sum = 0;
-            // 집 하나가 선택 된다.
-            for (Point h : homeList) {
+            for (Point h : hm) {
+                // 집 하나의 피자집들과의 최소배달거리 구하기
                 int dis = Integer.MAX_VALUE;
-                for (int i : combiList) {
-                    dis = Math.min(dis, Math.abs(h.x - pizzaList.get(i).x) + Math.abs(h.y - pizzaList.get(i).y));
+                for (int i : combi) {
+                    Point tmpPz = pz.get(i);
+                    dis = Math.min(dis, Math.abs(h.x - tmpPz.x) + Math.abs(h.y - tmpPz.y));
                 }
+                // 도시의 피자배달거리 구하기
                 sum += dis;
             }
             minSum = Math.min(minSum, sum);
         } else {
-            for (int i = idx; i < pizzaList.size(); i++) {
-                combiList[cnt] = i;
-                combi(cnt + 1, i + 1);
+            for (int i = idx; i < pz.size(); i++) {
+                combi[L] = i;
+                DFS(L + 1, i + 1);
             }
         }
     }
@@ -54,17 +54,17 @@ public class DFS_12 {
         N = kb.nextInt();
         M = kb.nextInt();
 
-        // 1) 피자집들을 ArrayList로 받는다. 집들을 ArrayList로 받는다.
+        // 집 좌표 리스트 및 피자집 좌표 리스트 구하기
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
-                int x = kb.nextInt();
-                if (x == 1) homeList.add(new Point(i, j));
-                else if (x == 2) pizzaList.add(new Point(i, j));
+                int tmp = kb.nextInt();
+                if (tmp == 1) hm.add(new Point(i, j));
+                if (tmp == 2) pz.add(new Point(i, j));
             }
         }
-        combiList = new int[M];
-        combi(0, 0);
 
+        combi = new int[M];
+        DFS(0, 0);
         System.out.println(minSum);
     }
 }
