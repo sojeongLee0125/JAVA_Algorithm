@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 
-// 나의 풀이
 public class Greedy_7_1 {
     static PriorityQueue<Node> pq = new PriorityQueue<>();
     static ArrayList<ArrayList<Node>> map = new ArrayList<>();
     static int answer;
     static boolean[] chk;
+
     static class Node implements Comparable<Node> {
         int num;
         int cost;
@@ -62,7 +62,6 @@ public class Greedy_7_1 {
         }
 
         solution();
-
         System.out.println(answer);
 
     }
