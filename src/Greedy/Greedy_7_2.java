@@ -7,7 +7,6 @@ public class Greedy_7_2 {
     static int[] arr;
     static int answer;
     static PriorityQueue<Node> pq = new PriorityQueue<>();
-
     static class Node implements Comparable<Node> {
         int v1;
         int v2;
